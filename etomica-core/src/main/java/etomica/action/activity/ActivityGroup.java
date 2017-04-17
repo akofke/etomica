@@ -7,6 +7,9 @@ package etomica.action.activity;
 import etomica.action.ActionGroup;
 import etomica.action.IAction;
 
+/**
+ * Test javadoc comment
+ */
 public interface ActivityGroup extends ActionGroup {
 
     /**
