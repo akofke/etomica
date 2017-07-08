@@ -22,12 +22,17 @@ import etomica.space.Space;
  */
 public final class SimulationRestart extends SimulationActionAdapter {
     
-    public SimulationRestart(Simulation sim, Space _space, IController _controller) {
-        setSimulation(sim, _space, _controller);
+    protected Configuration configuration;
+    protected boolean ignoreOverlap;
+    protected SimulationDataAction accumulatorAction;
+    private IController controller;
+    
+    public SimulationRestart(Simulation sim, IController _controller) {
+        setSimulation(sim, _controller);
     }
-
-    protected void setSimulation(Simulation sim, Space _space, IController _controller) {
-        super.setSimulation(sim, _space);
+    
+    protected void setSimulation(Simulation sim, IController _controller) {
+        super.setSimulation(sim);
         controller = _controller;
         if (space != null) {
             if (space.D() == 3) {
@@ -44,25 +49,25 @@ public final class SimulationRestart extends SimulationActionAdapter {
         ignoreOverlap = false;
         accumulatorAction = new SimulationDataAction(new ResetAccumulatorsAveraged());
     }
-
+    
     public SimulationDataAction getDataResetAction() {
         return accumulatorAction;
     }
-    
+
     public void setDataResetAction(SimulationDataAction newResetAction) {
         accumulatorAction = newResetAction;
+    }
+
+    public boolean isIgnoreOverlap() {
+        return ignoreOverlap;
     }
 
     public void setIgnoreOverlap(boolean doIgnoreOverlap) {
         ignoreOverlap = doIgnoreOverlap;
     }
-    
-    public boolean isIgnoreOverlap() {
-        return ignoreOverlap;
-    }
-    
+
     /**
-     * Resets boxs, integrators, and accumulators.
+     * Resets boxes, integrators, and accumulators.
      */
     public void actionPerformed() {
         int boxCount = simulation.getBoxCount();
@@ -101,23 +106,18 @@ public final class SimulationRestart extends SimulationActionAdapter {
 
         accumulatorAction.actionPerformed();
     }
-    
+
     /**
-     * @return Returns the configuration.
+     * @return the configuration.
      */
     public Configuration getConfiguration() {
         return configuration;
     }
+
     /**
      * @param configuration The configuration to set.
      */
     public void setConfiguration(Configuration configuration) {
         this.configuration = configuration;
     }
-
-    private static final long serialVersionUID = 1L;
-    protected Configuration configuration;
-    protected boolean ignoreOverlap;
-    protected SimulationDataAction accumulatorAction;
-    private IController controller;
 }

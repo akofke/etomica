@@ -105,7 +105,7 @@ public class DeviceButtonSingle extends Device {
         etomica.graphics.SimulationGraphic graphic = new etomica.graphics.SimulationGraphic(sim, APP_NAME, sim.getSpace(), sim.getController());
         
         //here's the part unique to this class
-        etomica.action.SimulationRestart action = new etomica.action.SimulationRestart(sim, sim.getSpace(), sim.getController());
+        etomica.action.SimulationRestart action = new etomica.action.SimulationRestart(sim, sim.getController());
         DeviceButtonSingle button = new DeviceButtonSingle(sim.getController(),action);
         //end of unique part
         graphic.add(button);

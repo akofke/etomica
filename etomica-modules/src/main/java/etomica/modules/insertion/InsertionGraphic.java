@@ -226,7 +226,7 @@ public class InsertionGraphic extends SimulationGraphic {
 
         final DeviceNSelector nSlider = new DeviceNSelector(sim.getController());
         nSlider.setResetAction(new IAction() {
-            SimulationRestart simRestart = new SimulationRestart(sim, space, sim.getController());   
+            SimulationRestart simRestart = new SimulationRestart(sim, sim.getController());
 
             public void actionPerformed() {
                 sim.box.setNMolecules(sim.speciesGhost, 0);

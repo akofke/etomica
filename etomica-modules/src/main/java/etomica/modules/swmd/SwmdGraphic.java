@@ -424,7 +424,7 @@ public class SwmdGraphic extends SimulationGraphic {
         peDisplay.setUnit(eUnit);
 
         final DeviceNSelector nSlider = new DeviceNSelector(sim.getController());
-        nSlider.setResetAction(new SimulationRestart(sim, space, sim.getController()));
+        nSlider.setResetAction(new SimulationRestart(sim, sim.getController()));
         nSlider.setSpecies(sim.species);
         nSlider.setBox(sim.box);
         nSlider.setMinimum(0);

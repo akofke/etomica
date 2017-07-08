@@ -73,7 +73,7 @@ public class DeviceTrioControllerButton extends Device {
      */
     protected void setSimulation(Simulation sim, Space space, Controller controller) {
         simulation = sim;
-        simRestart = new SimulationRestart(sim, space, controller);
+        simRestart = new SimulationRestart(sim, controller);
         final Controller c = controller;
         setController(c);
         startButton.setController(c);
