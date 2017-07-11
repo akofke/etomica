@@ -1,3 +1,14 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.sourcegraph.sourcegraph-plugin:sourcegraph-gradle-plugin:1.3.0"
+    }
+}
+
 apply plugin: 'eclipse'
 
 task wrapper(type: Wrapper) {
@@ -139,4 +150,13 @@ task javadocAll(type: Javadoc) {
     classpath = files(subprojects.collect { project -> project.sourceSets.main.compileClasspath })
 
     destinationDir = new File(projectDir, 'docs/javadoc')
+}
+
+allprojects {
+    repositories {
+        // helps resolve things like android support libraries, which we expect the user to have installed in their
+        // local maven repo
+        mavenLocal()
+    }
+    apply plugin: com.sourcegraph.SourcegraphPlugin
 }
